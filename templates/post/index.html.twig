@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+{% block body %}
+    <br>
+    <h3>Все сообщения пользователя <b><i>{{ app.user.name }}</i></b></h3><br>
+    <a class="btn btn-success" href="{{ path('post_new') }}">Создать новое сообщение</a><br><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Тема</th>
+                <th>Текст сообщения</th>
+                <th>Оставлено</th>
+                <th>Обновлено</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.topic }}</td>
+                <td>{{ post.description|slice(0,30) }}...</td>
+                <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('post_show', {'id': post.id}) }}">Просмотреть</a>
+                    <a href="{{ path('post_edit', {'id': post.id}) }}">Отредактировать</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Вы еще не оставляли сообщений</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

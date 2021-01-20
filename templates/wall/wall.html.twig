@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}Here you can see all posts{% endblock %}
+{% block body %}
+    <br><br>
+    <a href="{{ path('post_new') }}" class="btn btn-success">Click to leave a message</a><br><br>
+    {% if posts is not empty %}
+        <div class="row">
+            {% for post in posts|sort((a, b) => b.updatedAt <=> a.updatedAt) %}
+                <div class="col-12">
+                    <div class="card" style="width:auto; margin-bottom: 5px; background-color: khaki" >
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">Оставлен пользователем <b>{{ post.user.name }}</b> {{ post.updatedAt|date("d.m.Y h:m") }}</h6>
+                            <h5 class="card-title">Тема: {{ post.topic }}</h5>
+                            <p class="card-text">{{ post.description }}<a href="/post/{{ post.id}}"></a></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

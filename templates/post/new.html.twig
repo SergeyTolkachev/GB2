@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Новое сообщение{% endblock %}
+
+{% block body %}
+    <h1>Создать новое сообщение</h1>
+
+        {{ include('post/_form.html.twig') }}
+
+{% endblock %}
